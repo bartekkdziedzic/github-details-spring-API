@@ -10,4 +10,5 @@ public class GithubBranch {
 
     private String name;
     private GithubCommit commit;
+
 }

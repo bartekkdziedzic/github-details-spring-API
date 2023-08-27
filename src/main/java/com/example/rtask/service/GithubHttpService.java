@@ -27,7 +27,7 @@ public class GithubHttpService {
             Objects.requireNonNull(repositories);
             return repositories;
         } catch (HttpClientErrorException | NullPointerException e) {
-            throw new GitServiceException("custom");
+            throw new GitServiceException("user " + username + " not found");
         }
     }
 
@@ -41,10 +41,9 @@ public class GithubHttpService {
             Objects.requireNonNull(branches);
             return branches;
         } catch (HttpClientErrorException | NullPointerException e) {
-            throw new GitServiceException("custom");
+            throw new GitServiceException("user " + username + " branches not found");
         }
     }
-
 }
 
 

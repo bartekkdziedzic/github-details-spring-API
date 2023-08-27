@@ -11,5 +11,4 @@ public class ApplicationRestService {
     public RestTemplate restTemplate() {
         return new RestTemplate();
     }
-
 }

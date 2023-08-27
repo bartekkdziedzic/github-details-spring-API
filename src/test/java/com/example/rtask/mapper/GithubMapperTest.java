@@ -8,13 +8,10 @@ import com.example.rtask.model.GithubRepository;
 import com.example.rtask.model.Owner;
 import org.junit.jupiter.api.Test;
 
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
-import static org.junit.jupiter.api.Assertions.*;
 
 class GithubMapperTest {
 
@@ -56,7 +53,6 @@ class GithubMapperTest {
                 .fork(false)
                 .build();
 
-
         GithubBranchDto repoTestBranchDto = GithubBranchDto
                 .builder()
                 .name("TEST_BRANCH")
@@ -74,14 +70,12 @@ class GithubMapperTest {
                 .build();
 
         assertThat(result).isEqualTo(expectedResult);
-
     }
 
     @Test
     void mapRepoToDtoThrowsWhenNullGiven() {
 
         assertThatExceptionOfType(NullPointerException.class)
-                .isThrownBy(() -> GithubMapper.mapRepoToDto(null,null));
+                .isThrownBy(() -> GithubMapper.mapRepoToDto(null, null));
     }
-
 }

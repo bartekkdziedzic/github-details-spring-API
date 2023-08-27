@@ -12,7 +12,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
@@ -27,7 +26,6 @@ public class GithubService {
 
         List<GithubRepositoryDto> result = new ArrayList<>();
 
-
         for (GithubRepository githubRepo : githubRepos) {
             GithubBranch[] repoBranches = githubHttpService.getGithubBranches(githubRepo.getName(), username);
             List<GithubBranchDto> branchDtos = Arrays.stream(repoBranches).map(GithubMapper::mapBranchToDto).toList();
@@ -38,6 +36,4 @@ public class GithubService {
         }
         return result;
     }
-
-
 }

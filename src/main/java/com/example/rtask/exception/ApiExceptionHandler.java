@@ -33,25 +33,11 @@ public class ApiExceptionHandler extends ResponseEntityExceptionHandler {
 
         ApiRequestError apiException = new ApiRequestError(
                 ex.getStatusCode(),
-                ex.getMessage()
+                "Only application/json is supported"
         );
 
         return new ResponseEntity<>(apiException, headers, HttpStatus.NOT_ACCEPTABLE);
     }
 
-
-//    @ExceptionHandler(HttpMediaTypeNotAcceptableException.class)
-//    protected ResponseEntity<Object> handleHttpMediaTypeNotAcceptable(HttpMediaTypeNotAcceptableException ex
-//    ) {
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.setContentType(MediaType.valueOf(MediaType.APPLICATION_JSON_VALUE));
-//
-//        ApiRequestException apiException = new ApiRequestException(
-//                ex.getStatusCode(),
-//                ex.getMessage()
-//        );
-//
-//        return new ResponseEntity<>(apiException, headers, HttpStatus.NOT_ACCEPTABLE);
-//    }
 
 }

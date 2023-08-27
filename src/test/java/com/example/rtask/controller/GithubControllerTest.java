@@ -1,12 +1,5 @@
 package com.example.rtask.controller;
 
-import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
 import com.example.rtask.dto.GithubBranchDto;
 import com.example.rtask.dto.GithubRepositoryDto;
 import com.example.rtask.exception.GitServiceException;
@@ -14,7 +7,6 @@ import com.example.rtask.service.GithubService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 import org.junit.jupiter.api.Test;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -22,6 +14,12 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.List;
+
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @WebMvcTest(GithubController.class)
 class GithubControllerTest {
@@ -58,10 +56,9 @@ class GithubControllerTest {
         GitServiceException exception = new GitServiceException("test not found");
         when(githubService.getUserRepos(anyString())).thenThrow(exception);
 
-
         String expected = new JSONObject()
-                .put("status","NOT_FOUND")
-                .put("message","test not found")
+                .put("status", "NOT_FOUND")
+                .put("message", "test not found")
                 .toString();
 
         this.mockMvc.perform(get("/api/github/TEST_USER"))
@@ -73,15 +70,14 @@ class GithubControllerTest {
     public void endpointShouldReturnJsonOnly() throws Exception {
 
         String expected = new JSONObject()
-                .put("status","NOT_ACCEPTABLE")
-                .put("message","No acceptable representation")
+                .put("status", "NOT_ACCEPTABLE")
+                .put("message", "No acceptable representation")
                 .toString();
 
         this.mockMvc.perform(get("/api/github/TEST_USER").accept(MediaType.APPLICATION_XML_VALUE))
                 .andExpect(status().isNotAcceptable())
                 .andExpect(content().json(expected));
     }
-
 }
 
 
