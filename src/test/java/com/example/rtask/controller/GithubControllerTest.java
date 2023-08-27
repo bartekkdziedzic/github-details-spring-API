@@ -9,7 +9,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 import com.example.rtask.dto.GithubBranchDto;
 import com.example.rtask.dto.GithubRepositoryDto;
-import com.example.rtask.exception.ApiRequestError;
 import com.example.rtask.exception.GitServiceException;
 import com.example.rtask.service.GithubService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -19,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -47,7 +45,7 @@ class GithubControllerTest {
                 .build();
 
         String expectedResponseAsString = new ObjectMapper().writeValueAsString(List.of(expectedResponse));
-        when(githubService.buildUlr(anyString())).thenReturn(List.of(expectedResponse));
+        when(githubService.getUserRepos(anyString())).thenReturn(List.of(expectedResponse));
 
         this.mockMvc.perform(get("/api/github/TEST_USER"))
                 .andExpect(status().isOk())
@@ -58,7 +56,7 @@ class GithubControllerTest {
     public void endpointShouldReturnNotFound() throws Exception {
 
         GitServiceException exception = new GitServiceException("test not found");
-        when(githubService.buildUlr(anyString())).thenThrow(exception);
+        when(githubService.getUserRepos(anyString())).thenThrow(exception);
 
 
         String expected = new JSONObject()

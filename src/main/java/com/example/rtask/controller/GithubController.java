@@ -24,7 +24,7 @@ public class GithubController implements ErrorController {
     @GetMapping(value = "/github/{username}", produces = {MediaType.APPLICATION_JSON_VALUE})
     public List<GithubRepositoryDto> getData(@PathVariable("username") String username) throws GitServiceException {
 
-        return githubService.buildUlr(username);
+        return githubService.getUserRepos(username);
     }
 
 
