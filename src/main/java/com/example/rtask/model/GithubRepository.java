@@ -1,4 +1,4 @@
-package com.example.rtask.dto;
+package com.example.rtask.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -6,10 +6,13 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@Builder
-@NoArgsConstructor
 @AllArgsConstructor
-public class GithubBranchDto {
+@NoArgsConstructor
+@Builder
+public class GithubRepository {
+
     private String name;
-    private String lastCommitSha;
+    private Owner owner;
+    private boolean fork;
+
 }

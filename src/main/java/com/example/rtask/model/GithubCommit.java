@@ -1,6 +1,5 @@
 package com.example.rtask.model;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,8 +9,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Owner {
+public class GithubCommit {
 
-    private String login;
+    private String sha;
 
 }
