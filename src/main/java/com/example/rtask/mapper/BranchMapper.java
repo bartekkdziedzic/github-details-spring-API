@@ -1,12 +1,7 @@
 package com.example.rtask.mapper;
 
-import com.example.rtask.GithubBranch;
+import com.example.rtask.model.GithubBranch;
 import com.example.rtask.dto.GithubBranchDto;
-import org.springframework.context.annotation.Bean;
-import org.springframework.web.context.annotation.RequestScope;
-
-import java.util.function.Function;
-
 
 public class BranchMapper {
 

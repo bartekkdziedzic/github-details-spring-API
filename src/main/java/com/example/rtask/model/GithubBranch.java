@@ -1,4 +1,4 @@
-package com.example.rtask;
+package com.example.rtask.model;
 
 import lombok.Getter;
 import lombok.Setter;

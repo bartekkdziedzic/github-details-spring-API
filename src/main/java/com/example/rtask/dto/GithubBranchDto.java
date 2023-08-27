@@ -1,12 +1,14 @@
 package com.example.rtask.dto;
 
-import com.example.rtask.GithubCommit;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-@Getter
-@Setter
-
+@Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class GithubBranchDto {
     private String name;
     private String lastCommitSha;

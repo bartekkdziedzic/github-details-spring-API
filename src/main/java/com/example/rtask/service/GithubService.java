@@ -1,46 +1,52 @@
 package com.example.rtask.service;
 
-import com.example.rtask.GithubBranch;
-import com.example.rtask.GithubCommit;
+import com.example.rtask.exception.GitServiceException;
+import com.example.rtask.model.GithubBranch;
 import com.example.rtask.dto.GithubBranchDto;
 import com.example.rtask.dto.GithubRepositoryDto;
 import com.example.rtask.mapper.BranchMapper;
+import com.example.rtask.model.HttpModel;
 import com.example.rtask.repository.GithubRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
+import org.springframework.http.*;
 
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class GithubService {
 
 
-    public List<GithubRepositoryDto> buildUlr(String username) {
+    public List<GithubRepositoryDto> buildUlr(String username) throws GitServiceException {
         RestTemplate restTemplate = new RestTemplate();
 
         String base = "https://api.github.com/users/{username}/repos";
-        ResponseEntity<GithubRepository[]> response = restTemplate.exchange(base, HttpMethod.GET, null, GithubRepository[].class, username);
-        GithubRepository[] repositories = response.getBody();
+
+        GithubRepository[] repositories;
+        ResponseEntity<GithubRepository[]> response ;
+
+        try {
+        response = restTemplate.exchange(base, HttpMethod.GET, null, GithubRepository[].class, username);
+        }
+        catch (HttpClientErrorException.NotFound  e){
+             throw new GitServiceException("custom");
+        }
+         repositories = response.getBody();
+
         return githubReposDetailListing(repositories);
     }
 
     public List<GithubRepositoryDto> githubReposDetailListing(GithubRepository[] repositories) {
-
         RestTemplate restTemplate = new RestTemplate();
+
         String base = "https://api.github.com/repos/{username}/{repo}/branches";
-
         List<GithubRepositoryDto> responseRepos = new ArrayList<>();
-        for (GithubRepository repo : repositories) {
 
+        for (GithubRepository repo : repositories) {
 
             if (!repo.isFork()) {
                 GithubRepositoryDto githubRepositoryDto = new GithubRepositoryDto();

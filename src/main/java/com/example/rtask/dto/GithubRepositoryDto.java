@@ -1,20 +1,14 @@
 package com.example.rtask.dto;
 
-import com.example.rtask.model.Owner;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-@Getter
-@Setter
-@AllArgsConstructor
+@Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 public class GithubRepositoryDto {
 
     private String name;
     private String ownerLogin;
     private GithubBranchDto[] branches;
-
-
 }
