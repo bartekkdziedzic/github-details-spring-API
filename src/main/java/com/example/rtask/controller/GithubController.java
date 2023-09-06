@@ -16,7 +16,6 @@ public class GithubController implements ErrorController {
 
     private final GithubService githubService;
 
-    @Autowired
     public GithubController(GithubService githubService) {
         this.githubService = githubService;
     }

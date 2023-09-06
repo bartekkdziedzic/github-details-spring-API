@@ -14,8 +14,8 @@ public class GithubMapper {
         Objects.requireNonNull(githubBranch);
 
         return GithubBranchDto.builder()
-                .name(githubBranch.getName())
-                .lastCommitSha(githubBranch.getCommit().getSha())
+                .name(githubBranch.name())
+                .lastCommitSha(githubBranch.commit().sha())
                 .build();
     }
 
@@ -24,8 +24,8 @@ public class GithubMapper {
         Objects.requireNonNull(githubRepository);
 
         return GithubRepositoryDto.builder()
-                .name(githubRepository.getName())
-                .ownerLogin(githubRepository.getOwner().getLogin())
+                .name(githubRepository.name())
+                .ownerLogin(githubRepository.owner().login())
                 .branches(branchDtos)
                 .build();
     }

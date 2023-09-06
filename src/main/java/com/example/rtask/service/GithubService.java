@@ -27,7 +27,7 @@ public class GithubService {
         List<GithubRepositoryDto> result = new ArrayList<>();
 
         for (GithubRepository githubRepo : githubRepos) {
-            GithubBranch[] repoBranches = githubHttpService.getGithubBranches(githubRepo.getName(), username);
+            GithubBranch[] repoBranches = githubHttpService.getGithubBranches(githubRepo.name(), username);
             List<GithubBranchDto> branchDtos = Arrays.stream(repoBranches).map(GithubMapper::mapBranchToDto).toList();
 
             GithubRepositoryDto repositoryDto = GithubMapper.mapRepoToDto(githubRepo, branchDtos.toArray(GithubBranchDto[]::new));

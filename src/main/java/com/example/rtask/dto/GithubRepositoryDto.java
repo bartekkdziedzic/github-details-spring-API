@@ -1,14 +1,8 @@
 package com.example.rtask.dto;
 
-import lombok.*;
+import lombok.Builder;
 
-@Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class GithubRepositoryDto {
+public record GithubRepositoryDto(String name, String ownerLogin, GithubBranchDto[] branches) {
 
-    private String name;
-    private String ownerLogin;
-    private GithubBranchDto[] branches;
 }
