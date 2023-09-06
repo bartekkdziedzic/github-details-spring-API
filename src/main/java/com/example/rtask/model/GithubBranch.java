@@ -1,14 +1,8 @@
 package com.example.rtask.model;
 
-import lombok.*;
+import lombok.Builder;
 
-@Data
-@AllArgsConstructor
-@NoArgsConstructor
 @Builder
-public class GithubBranch {
-
-    private String name;
-    private GithubCommit commit;
+public record GithubBranch(String name, GithubCommit commit) {
 
 }

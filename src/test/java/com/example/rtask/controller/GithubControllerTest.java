@@ -71,7 +71,7 @@ class GithubControllerTest {
 
         String expected = new JSONObject()
                 .put("status", "NOT_ACCEPTABLE")
-                .put("message", "No acceptable representation")
+                .put("message", "Only application/json is supported")
                 .toString();
 
         this.mockMvc.perform(get("/api/github/TEST_USER").accept(MediaType.APPLICATION_XML_VALUE))
