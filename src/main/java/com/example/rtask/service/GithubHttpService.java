@@ -3,9 +3,13 @@ package com.example.rtask.service;
 import com.example.rtask.exception.GitServiceException;
 import com.example.rtask.model.GithubBranch;
 import com.example.rtask.model.GithubRepository;
+import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class GithubHttpService {
@@ -19,7 +23,7 @@ public class GithubHttpService {
     private final static String baseUrl = "https://api.github.com";
 
 
-    public GithubRepository[] getGithubRepoDto(String username) throws GitServiceException {
+    public List<GithubRepository> getGithubRepoDto(String username) throws GitServiceException {
 
         final String userRepoEndpoint = "/users/{username}/repos";
 
@@ -32,12 +36,12 @@ public class GithubHttpService {
                         status -> status.is4xxClientError() || status.is5xxServerError(),
                         response -> Mono.error(new GitServiceException("user " + username + " not found"))
                 )
-                .bodyToMono(GithubRepository[].class)
+                .bodyToMono(new ParameterizedTypeReference<List<GithubRepository>>(){})
                 .block();
     }
 
 
-    public GithubBranch[] getGithubBranches(String repoName, String username) throws GitServiceException {
+    public List<GithubBranch> getGithubBranches(String repoName, String username) throws GitServiceException {
 
         final String branchesEndpoint = "/repos/{username}/{repo}/branches";
 
@@ -50,7 +54,7 @@ public class GithubHttpService {
                         status -> status.is4xxClientError() || status.is5xxServerError(),
                         response -> Mono.error(new GitServiceException("user " + username + " branches not found"))
                 )
-                .bodyToMono(GithubBranch[].class)
+                .bodyToMono(new ParameterizedTypeReference<List<GithubBranch>>(){})
                 .block();
     }
 

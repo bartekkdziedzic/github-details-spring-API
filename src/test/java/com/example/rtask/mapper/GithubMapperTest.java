@@ -60,13 +60,13 @@ class GithubMapperTest {
                 .build();
 
         GithubRepositoryDto result = GithubMapper.mapRepoToDto(testRepository,
-                List.of(repoTestBranchDto).toArray(GithubBranchDto[]::new));
+                List.of(repoTestBranchDto));
 
         GithubRepositoryDto expectedResult = GithubRepositoryDto
                 .builder()
                 .name("TEST_REPO")
                 .ownerLogin("TEST_OWNER")
-                .branches(List.of(repoTestBranchDto).toArray(GithubBranchDto[]::new))
+                .branches(List.of(repoTestBranchDto))
                 .build();
 
         assertThat(result).isEqualTo(expectedResult);

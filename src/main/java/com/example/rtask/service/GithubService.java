@@ -10,7 +10,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -22,15 +21,17 @@ public class GithubService {
 
     public List<GithubRepositoryDto> getUserRepos(String username) throws GitServiceException {
 
-        GithubRepository[] githubRepos = githubHttpService.getGithubRepoDto(username);
+        List<GithubRepository> githubRepos = githubHttpService.getGithubRepoDto(username);
 
         List<GithubRepositoryDto> result = new ArrayList<>();
 
         for (GithubRepository githubRepo : githubRepos) {
-            GithubBranch[] repoBranches = githubHttpService.getGithubBranches(githubRepo.name(), username);
-            List<GithubBranchDto> branchDtos = Arrays.stream(repoBranches).map(GithubMapper::mapBranchToDto).toList();
+            List<GithubBranch> repoBranches = githubHttpService.getGithubBranches(githubRepo.name(), username);
+            List<GithubBranchDto> branchDtos = repoBranches.stream()
+                    .map(GithubMapper::mapBranchToDto)
+                    .toList();
 
-            GithubRepositoryDto repositoryDto = GithubMapper.mapRepoToDto(githubRepo, branchDtos.toArray(GithubBranchDto[]::new));
+            GithubRepositoryDto repositoryDto = GithubMapper.mapRepoToDto(githubRepo, branchDtos.stream().toList());
             result.add(repositoryDto);
 
         }

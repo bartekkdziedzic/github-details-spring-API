@@ -1,10 +1,11 @@
 package com.example.rtask.mapper;
 
+import com.example.rtask.dto.GithubBranchDto;
 import com.example.rtask.dto.GithubRepositoryDto;
 import com.example.rtask.model.GithubBranch;
-import com.example.rtask.dto.GithubBranchDto;
 import com.example.rtask.model.GithubRepository;
 
+import java.util.List;
 import java.util.Objects;
 
 public class GithubMapper {
@@ -19,7 +20,7 @@ public class GithubMapper {
                 .build();
     }
 
-    public static GithubRepositoryDto mapRepoToDto(GithubRepository githubRepository, GithubBranchDto[] branchDtos) {
+    public static GithubRepositoryDto mapRepoToDto(GithubRepository githubRepository, List<GithubBranchDto> branchDtos) {
 
         Objects.requireNonNull(githubRepository);
 
