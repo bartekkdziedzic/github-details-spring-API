@@ -1,5 +1,5 @@
 
-# Github Repository Listing Recrutation  Spring Boot 3 API
+# Github Repository Listing Spring Boot 3 API
 
 The project consists of a Spring Boot 3 API that can list specific details of given username Github repositories.
 
