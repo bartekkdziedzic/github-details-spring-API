@@ -39,10 +39,10 @@ class GithubServiceTest {
 
 
         when(githubHttpService.getGithubRepoDto(anyString()))
-                .thenReturn(List.of(new GithubRepository("repo1", new Owner("TEST_USER"), false)).toArray(GithubRepository[]::new));
+                .thenReturn(List.of(new GithubRepository("repo1", new Owner("TEST_USER"), false)));
 
         when(githubHttpService.getGithubBranches(anyString(), anyString()))
-                .thenReturn(List.of(githubBranch).toArray(GithubBranch[]::new));
+                .thenReturn(List.of(githubBranch));
 
 
         List<GithubRepositoryDto> result = githubService.getUserRepos("TEST_USER");
@@ -58,7 +58,7 @@ class GithubServiceTest {
                 .builder()
                 .name("repo1")
                 .ownerLogin("TEST_USER")
-                .branches(List.of(branchDto).toArray(GithubBranchDto[]::new))
+                .branches(List.of(branchDto))
 
                 .build();
 
